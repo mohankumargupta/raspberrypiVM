@@ -19,7 +19,7 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
 2. On the emulator screen, type the following command:
     sed -i -e 's/^/#/' /etc/ld.preload.so
 
-    Then type the following commands one line at a time.
+    Then type the following commands one line at a time (unfortunately, no copy/paste available in qemu).
 
     echo > /etc/udev/rules.d/90-qemu.rules
 
@@ -28,7 +28,7 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
     echo 'KERNEL=="sda?", SYMLINK+="mmcblk0p%n"' >> /etc/udev/rules.d/90-qemu.rules
 
     echo 'KERNEL=="sda2", SYMLINK+="root"' >> /etc/udev/rules.d/90-qemu.rules
-    
+
     cat /etc/udev/rules.d/90-qemu.rules
 
     The last command will print the contents of 90-qemu.rules file - the output should look like this
