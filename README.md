@@ -6,13 +6,14 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
 
 ### Steps to follow:
 
-1. double-click on install.bat (could take a while, be patient, also needs to download raspian image ~1.2GB)
+1. double-click on install.bat 
+   (could take a while, be patient, also needs to download raspian image ~1.2GB)
     Here is what happens
-    * Downloads latest raspian image (OS of raspberry pi 2)
-    * unzips emulator(QEMU) and raspian image
-    * resizes(expands) the raspian image (how large it expands the image is controlled by a file called 
-      'RESIZED-FILESIZE.txt' , default is 10G)
-    * emulator opens in new window. If all goes to plan, you should end up with the following screen.
+    - Downloads latest raspian image (OS of raspberry pi 2)
+    - unzips emulator(QEMU) and raspian image
+    - expands the raspian image (how large it expands the image is controlled by a file called 
+      'RESIZED-FILESIZE.txt' , default is 4G)
+    - emulator opens in new window. If all goes to plan, you should end up with the following screen.
     ![install.jpg](https://raw.githubusercontent.com/mohankumargupta/raspberrypiVM/master/install.jpg)
 
 2. On the emulator screen, type the following command:
@@ -21,9 +22,13 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
     Then type the following commands one line at a time.
 
     echo > /etc/udev/rules.d/90-qemu.rules
+
     echo 'KERNEL=="sda", SYMLINK+="mmcblk0"' >> /etc/udev/rules.d/90-qemu.rules
+
     echo 'KERNEL=="sda?", SYMLINK+="mmcblk0p%n"' >> /etc/udev/rules.d/90-qemu.rules
+
     echo 'KERNEL=="sda2", SYMLINK+="root"' >> /etc/udev/rules.d/90-qemu.rules
+    
     cat /etc/udev/rules.d/90-qemu.rules
 
     The last command will print the contents of 90-qemu.rules file - the output should look like this
