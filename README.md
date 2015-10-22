@@ -21,58 +21,67 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
 
     Then type the following commands one line at a time (unfortunately, no copy/paste available in qemu).
 
-    echo > /etc/udev/rules.d/90-qemu.rules
+    ```
+    cat<<EOF > /etc/udev/rules.d/90-qemu.rules
+    KERNEL=="sda", SYMLINK+="mmcblk0"
+    KERNEL=="sda?", SYMLINK+="mmcblk0p%n"
+    KERNEL=="sda2", SYMLINK+="root"
+    EOF
+    ```
 
-    echo 'KERNEL=="sda", SYMLINK+="mmcblk0"' >> /etc/udev/rules.d/90-qemu.rules
+    Then type the following command:
 
-    echo 'KERNEL=="sda?", SYMLINK+="mmcblk0p%n"' >> /etc/udev/rules.d/90-qemu.rules
-
-    echo 'KERNEL=="sda2", SYMLINK+="root"' >> /etc/udev/rules.d/90-qemu.rules
-
-    cat /etc/udev/rules.d/90-qemu.rules
+    >cat /etc/udev/rules.d/90-qemu.rules
 
     The last command will print the contents of 90-qemu.rules file - the output should look like this
     ![udevrules.jpg](https://raw.githubusercontent.com/mohankumargupta/raspberrypiVM/master/udevrules.jpg)
 
-2a. dosfsck -w -r -l -a -v -t /dev/mmcblk0p1
+    If it doesn't just rinse and repeat.
 
 3. double-click run.bat
 
-   ### RUNNING FOR THE FIRST TIME
-   When you run for the first time, you will end up on this screen.
+   #### RUNNING FOR THE FIRST TIME
+   1. ###### When you run for the first time, you will end up on this screen.
 
    ![run.jpg](https://raw.githubusercontent.com/mohankumargupta/raspberrypiVM/master/run.jpg)
 
-4. Now fool raspian into thinking that our raspian image is on a SD card 
+   2. ###### Fool raspian into thinking that our root partition is on a SD card 
 
    ln -snf mmcblk0p2 /dev/root
 
-5. Now type the following:
-
-   raspi-config
-
-   This is known as the raspi-config tool (see https://www.raspberrypi.org/documentation/configuration/raspi-config.md for more info)
-
-   We need to make 3 changes:
-   1. Expand Filesystem
-   2. Enable Boot to Desktop/Scratch
-   3. Change keyboard layout by choosing 3 Internationisation Options -> I3 Change Keyboard Layout 
-
-
-
-6. Type the following one line at a time
+   3. ###### Fix screen resolution
+     Type the following one line at a time
 
      cat <<EOF > /etc/X11/xorg.conf
-     Section "Screen"
-     Identifier "Default Screen"
-     DefaultDepth 16
-     SubSection "Display"
-     # Viewport 0 0
-     Depth 16
-     Modes "800x600"
-     EndSubsection
-     EndSection    
-     EOF
+
+     >Section "Screen"
+     >Identifier "Default Screen"
+     >DefaultDepth 16
+     >SubSection "Display"
+     ># Viewport 0 0
+     >Depth 16
+     >Modes "800x600"
+     >EndSubsection
+     >EndSection    
+     >EOF
+
+
+   4. Now type the following:
+
+   >raspi-config
+
+   This is known as the raspi-config tool 
+   (see https://www.raspberrypi.org/documentation/configuration/raspi-config.md for more info)
+
+   We need to make 3 changes:
+   - Expand Filesystem
+   - Enable Boot to Desktop/Scratch
+   - Change keyboard layout by choosing 3 Internationisation Options -> I3 Change Keyboard Layout 
+
+    Then exit and close window. Run run.bat again and should get to the desktop
+
+
+
 
 
 
