@@ -31,7 +31,9 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
 
     Then type the following command:
 
-    >cat /etc/udev/rules.d/90-qemu.rules
+    ```
+    cat /etc/udev/rules.d/90-qemu.rules
+    ```
 
     The last command will print the contents of 90-qemu.rules file - the output should look like this
     ![udevrules.jpg](https://raw.githubusercontent.com/mohankumargupta/raspberrypiVM/master/udevrules.jpg)
@@ -52,23 +54,25 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
    3. ###### Fix screen resolution
      Type the following one line at a time
 
+     ```
      cat <<EOF > /etc/X11/xorg.conf
-
-     >Section "Screen"
-     >Identifier "Default Screen"
-     >DefaultDepth 16
-     >SubSection "Display"
-     ># Viewport 0 0
-     >Depth 16
-     >Modes "800x600"
-     >EndSubsection
-     >EndSection    
-     >EOF
+     Section "Screen"
+     Identifier "Default Screen"
+     DefaultDepth 16
+     SubSection "Display"
+     Depth 16
+     Modes "800x600"
+     EndSubsection
+     EndSection    
+     EOF
+     ```
 
 
    4. Now type the following:
 
-   >raspi-config
+   ```
+   raspi-config
+   ```
 
    This is known as the raspi-config tool 
    (see https://www.raspberrypi.org/documentation/configuration/raspi-config.md for more info)
