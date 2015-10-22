@@ -12,7 +12,8 @@ Start-Sleep $sleepDuration
 
 #download latest raspian image
 Write-Output 'STEP2: Downloading raspian image (about 1.2G) '
-$imageUrl = 'http://downloads.raspberrypi.org/raspbian/images/raspbian-2014-12-25/2014-12-24-wheezy-raspbian.zip'
+$imageUrl = 'http://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-wheezy-raspbian.zip'
+#$imageUrl = 'http://downloads.raspberrypi.org/raspbian/images/raspbian-2014-12-25/2014-12-24-wheezy-raspbian.zip'
 #$imageUrl = 'http://downloads.raspberrypi.org/raspbian_latest' 
 $wgetCommand = ".\wget.exe -c $imageUrl  "
 Invoke-Expression -Command $wgetCommand
