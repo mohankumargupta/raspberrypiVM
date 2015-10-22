@@ -12,7 +12,7 @@ Start-Sleep $sleepDuration
 
 #download latest raspian image
 Write-Output 'STEP2: Downloading raspian image (about 1.2G) '
-$imageUrl = 'http://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-wheezy-raspbian.zip'
+$imageUrl = 'http://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip'
 #$imageUrl = 'http://downloads.raspberrypi.org/raspbian/images/raspbian-2014-12-25/2014-12-24-wheezy-raspbian.zip'
 #$imageUrl = 'http://downloads.raspberrypi.org/raspbian_latest' 
 $wgetCommand = ".\wget.exe -c $imageUrl  "
@@ -40,15 +40,21 @@ $kernel = 'kernel-qemu'
 #$kernel = 'kernel-qemu-jessie'
 Copy-Item $kernel -Destination qemu  
 
+
+
 #resize qemu image
 Write-Output 'STEP6:Resize qemu image'
 $newfilesize = Get-Content "RESIZED-FILESIZE.txt"|Out-String
 cd qemu
 $imgfile = (Get-ChildItem *.img).name
+$newimgfile  = $imgfile -replace 'img','qcow2'
+#convert raw disk to qcow2 format
+#Write-Output ".\qemu-img convert -c -f raw -O qcow2  $imgfile $newimgfile"
+#.\qemu-img convert -c -f raw -O qcow2  $imgfile $newimgfile
 .\qemu-img.exe resize $imgfile +$newfilesize
 
 
 #run qemu
 Write-Output "STEP7:Running QEMU Virtualisation program with an image named:$imgfile"  
-.\qemu-system-armw.exe -kernel $kernel -cpu arm1176 -m 192 -M versatilepb -no-reboot -serial stdio -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw init=/bin/bash" -hda $imgfile
-Write-Output ".\qemu-system-armw.exe -kernel $kernel -cpu arm1176 -m 192 -M versatilepb -no-reboot -serial stdio -append `"root=/dev/sda2 panic=1 rootfstype=ext4 rw init=/bin/bash`" -hda $imgfile"
+.\qemu-system-armw.exe -kernel $kernel -cpu arm1176 -m 192 -M versatilepb -no-reboot -serial stdio -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw init=/bin/bash" -hda $imgfile -net user
+Write-Output ".\qemu-system-armw.exe -kernel $kernel -cpu arm1176 -m 192 -M versatilepb -no-reboot -serial stdio -append `"root=/dev/sda2 panic=1 rootfstype=ext4 rw init=/bin/bash`" -hda $imgfile" 
