@@ -43,15 +43,15 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
 3. double-click run.bat
 
    #### RUNNING FOR THE FIRST TIME
-   1. ###### When you run for the first time, you will end up on this screen.
+   1. When you run for the first time, you will end up on this screen.
 
    ![run.jpg](https://raw.githubusercontent.com/mohankumargupta/raspberrypiVM/master/run.jpg)
 
-   2. ###### Fool raspian into thinking that our root partition is on a SD card 
+   2. Fool raspian into thinking that our root partition is on a SD card 
 
    ln -snf mmcblk0p2 /dev/root
 
-   3. ###### Fix screen resolution
+   3. Fix screen resolution
      Type the following one line at a time
 
      ```
