@@ -52,6 +52,7 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
    ln -snf mmcblk0p2 /dev/root
 
    3. Fix screen resolution
+   
      Type the following one line at a time
 
      ```
