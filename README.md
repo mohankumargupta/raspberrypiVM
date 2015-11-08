@@ -60,19 +60,28 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
 
    ![run.jpg](https://raw.githubusercontent.com/mohankumargupta/raspberrypiVM/master/run.jpg)
 
+   This is known as the raspi-config tool. (see https://www.raspberrypi.org/documentation/configuration/raspi-config.md for more info)
+
+   We need to make 2 changes:
+   - Enable Boot to Desktop
+   - Change keyboard layout by choosing 3 Internationisation Options -> I3 Change Keyboard Layout 
+
+   2.
+
    2. Fool raspian into thinking that our root partition is on a SD card 
 
-   ln -snf mmcblk0p2 /dev/root
+   ```
+   sudo ln -snf mmcblk0p2 /dev/root
+   ```
 
-   [EXTRA -resize partition]
-   
-
+ 
 
    3. Fix screen resolution
 
      Type the following one line at a time
 
      ```
+     sudo su
      cat <<EOF > /etc/X11/xorg.conf
      Section "Screen"
      Identifier "Default Screen"
@@ -85,22 +94,11 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
      EOF
      ```
 
+    4. Close Qemu and double-click run.bat again
 
-   4. Now type the following:
+    5. It should boot to desktop.
 
-   ```
-   raspi-config
-   ```
-
-   This is known as the raspi-config tool 
-   (see https://www.raspberrypi.org/documentation/configuration/raspi-config.md for more info)
-
-   We need to make 3 changes:
-   - Expand Filesystem
-   - Enable Boot to Desktop/Scratch
-   - Change keyboard layout by choosing 3 Internationisation Options -> I3 Change Keyboard Layout 
-
-    Then exit and close window. Run run.bat again and should get to the desktop
+  
 
 
 
