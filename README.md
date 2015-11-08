@@ -1,5 +1,4 @@
-# EMULATE RASPBERRY PI 2 ON WINDOWS HOST (Windows 7 or Windows 10)
-
+# EMULATE RASPBERRY PI 2 ON WINDOWS HOST
 
 ## Installation:
 Download using the 'Download Zip' button on the right and unzip to a folder on your computer.Then follow the instructions below.
@@ -17,7 +16,10 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
     ![install.jpg](https://raw.githubusercontent.com/mohankumargupta/raspberrypiVM/master/install.jpg)
 
 2. On the emulator screen, type the following command:
-    sed -i -e 's/^/#/' /etc/ld.preload.so
+    
+    ```
+    sed -i -e 's/^/#/' /etc/ld.so.preload
+    ```
 
     Then type the following commands one line at a time (unfortunately, no copy/paste available in qemu).
 
@@ -51,8 +53,12 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
 
    ln -snf mmcblk0p2 /dev/root
 
-   3. Fix screen resolution
+   [EXTRA -resize partition]
    
+
+
+   3. Fix screen resolution
+
      Type the following one line at a time
 
      ```

@@ -58,3 +58,4 @@ $newimgfile  = $imgfile -replace 'img','qcow2'
 Write-Output "STEP7:Running QEMU Virtualisation program with an image named:$imgfile"  
 .\qemu-system-armw.exe -kernel $kernel -cpu arm1176 -m 192 -M versatilepb -no-reboot -serial stdio -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw init=/bin/bash" -hda $imgfile -net user
 Write-Output ".\qemu-system-armw.exe -kernel $kernel -cpu arm1176 -m 192 -M versatilepb -no-reboot -serial stdio -append `"root=/dev/sda2 panic=1 rootfstype=ext4 rw init=/bin/bash`" -hda $imgfile" 
+
