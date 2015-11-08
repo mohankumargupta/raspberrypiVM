@@ -21,6 +21,16 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
     sed -i -e 's/^/#/' /etc/ld.so.preload
     ```
 
+    Then type this command
+    ```
+    cat /etc/ld.so.preload
+    ```
+
+    The output should be 
+    ![preload.jpg](https://raw.githubusercontent.com/mohankumargupta/raspberrypiVM/master/preload.jpg)
+
+
+
     Then type the following commands one line at a time (unfortunately, no copy/paste available in qemu).
 
     ```
@@ -41,6 +51,7 @@ Download using the 'Download Zip' button on the right and unzip to a folder on y
     ![udevrules.jpg](https://raw.githubusercontent.com/mohankumargupta/raspberrypiVM/master/udevrules.jpg)
 
     If it doesn't just rinse and repeat.
+    If success, close the Qemu emulator window.
 
 3. double-click run.bat
 
